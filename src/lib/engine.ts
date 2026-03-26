@@ -9,6 +9,7 @@ export const DEFAULTS: ResolvedOptions = {
   gridSize: 170,
   threshold: 128,
   dotColor: "rgba(40, 40, 45, 0.9)",
+  preserveColors: false,
   mouseRadius: 140,
   mouseForce: 40,
   ease: 0.12,
@@ -28,6 +29,10 @@ export const DEFAULTS: ResolvedOptions = {
 interface DotGrid {
   x: Float32Array;
   y: Float32Array;
+  colorR: Uint8Array | null;
+  colorG: Uint8Array | null;
+  colorB: Uint8Array | null;
+  colorA: Uint8Array | null;
   count: number;
 }
 
@@ -157,12 +162,37 @@ function sampleImage(
   };
   const jitterAmt = unitScale * opts.jitter;
 
-  for (let i = 0; i < n; i++) {
-    xArr[i] = offsetX + coords[i][0] * unitScale + rand() * jitterAmt;
-    yArr[i] = offsetY + coords[i][1] * unitScale + rand() * jitterAmt;
+  // Per-dot colors when preserveColors is on
+  let rArr: Uint8Array | null = null;
+  let gArr: Uint8Array | null = null;
+  let bArr: Uint8Array | null = null;
+  let aArr: Uint8Array | null = null;
+
+  if (opts.preserveColors) {
+    rArr = new Uint8Array(n);
+    gArr = new Uint8Array(n);
+    bArr = new Uint8Array(n);
+    aArr = new Uint8Array(n);
   }
 
-  return { x: xArr, y: yArr, count: n };
+  for (let i = 0; i < n; i++) {
+    const cx = coords[i][0];
+    const cy = coords[i][1];
+    xArr[i] = offsetX + cx * unitScale + rand() * jitterAmt;
+    yArr[i] = offsetY + cy * unitScale + rand() * jitterAmt;
+
+    if (opts.preserveColors && cx >= 0 && cx < G && cy >= 0 && cy < G) {
+      const pi = (cy * G + cx) * 4;
+      rArr![i] = pixels[pi];
+      gArr![i] = pixels[pi + 1];
+      bArr![i] = pixels[pi + 2];
+      aArr![i] = pixels[pi + 3];
+    } else if (opts.preserveColors) {
+      aArr![i] = 0;
+    }
+  }
+
+  return { x: xArr, y: yArr, colorR: rArr, colorG: gArr, colorB: bArr, colorA: aArr, count: n };
 }
 
 // --- State init ---
@@ -201,6 +231,10 @@ export function initState(
     homeY: grid.y,
     renderX,
     renderY,
+    colorR: grid.colorR,
+    colorG: grid.colorG,
+    colorB: grid.colorB,
+    colorA: grid.colorA,
     dotSize:
       Math.max(0.5, (Math.min(w, h) * opts.scale) / opts.gridSize) *
       opts.dotScale,
@@ -293,10 +327,38 @@ export function tick(s: DitheredState, time: number, opts: ResolvedOptions) {
 // --- Render ---
 
 export function renderFrame(s: DitheredState, dotColor: string) {
-  const { ctx, renderX, renderY, dotSize, count, w, h } = s;
+  const { ctx, renderX, renderY, dotSize, count, w, h, colorR, colorG, colorB, colorA } = s;
   ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = dotColor;
-  for (let i = 0; i < count; i++) {
-    ctx.fillRect(renderX[i], renderY[i], dotSize, dotSize);
+
+  if (colorR && colorG && colorB && colorA) {
+    // Per-dot colors: quantize to reduce fillStyle changes
+    const buckets = new Map<string, number[]>();
+    for (let i = 0; i < count; i++) {
+      if (colorA[i] < 20) continue;
+      // Quantize to steps of 8 for batching
+      const r = colorR[i] & 0xf8;
+      const g = colorG[i] & 0xf8;
+      const b = colorB[i] & 0xf8;
+      const a = (colorA[i] >> 5) / 7;
+      const key = `${r},${g},${b},${a.toFixed(2)}`;
+      let arr = buckets.get(key);
+      if (!arr) {
+        arr = [];
+        buckets.set(key, arr);
+      }
+      arr.push(i);
+    }
+    for (const [key, indices] of buckets) {
+      const [r, g, b, a] = key.split(",");
+      ctx.fillStyle = `rgba(${r},${g},${b},${a})`;
+      for (const i of indices) {
+        ctx.fillRect(renderX[i], renderY[i], dotSize, dotSize);
+      }
+    }
+  } else {
+    ctx.fillStyle = dotColor;
+    for (let i = 0; i < count; i++) {
+      ctx.fillRect(renderX[i], renderY[i], dotSize, dotSize);
+    }
   }
 }

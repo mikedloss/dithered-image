@@ -15,6 +15,7 @@ function resolveOptions(opts?: DitheredImageOptions): ResolvedOptions {
     jitter: opts?.jitter ?? DEFAULTS.jitter,
     padding: opts?.padding ?? DEFAULTS.padding,
     cornerRadius: opts?.cornerRadius ?? DEFAULTS.cornerRadius,
+    preserveColors: opts?.preserveColors ?? DEFAULTS.preserveColors,
     shockwave: {
       speed: opts?.shockwave?.speed ?? DEFAULTS.shockwave.speed,
       width: opts?.shockwave?.width ?? DEFAULTS.shockwave.width,

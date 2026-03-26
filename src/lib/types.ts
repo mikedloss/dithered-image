@@ -23,6 +23,8 @@ export interface DitheredImageOptions {
   padding?: number;
   /** Corner radius of the outer rounded rect as a fraction (default: 0.15) */
   cornerRadius?: number;
+  /** Preserve original image colors per-dot instead of using dotColor (default: false) */
+  preserveColors?: boolean;
   /** Shockwave settings for click ripple effect */
   shockwave?: {
     speed?: number;
@@ -42,6 +44,10 @@ export interface DitheredState {
   renderX: Float32Array;
   renderY: Float32Array;
   dotSize: number;
+  colorR: Uint8Array | null;
+  colorG: Uint8Array | null;
+  colorB: Uint8Array | null;
+  colorA: Uint8Array | null;
   displaceX: Float32Array;
   displaceY: Float32Array;
   count: number;
@@ -54,6 +60,7 @@ export interface DitheredState {
   _firstRender: boolean;
 }
 
-export type ResolvedOptions = Required<Omit<DitheredImageOptions, "shockwave">> & {
+export type ResolvedOptions = Required<Omit<DitheredImageOptions, "shockwave" | "preserveColors">> & {
+  preserveColors: boolean;
   shockwave: Required<NonNullable<DitheredImageOptions["shockwave"]>>;
 };

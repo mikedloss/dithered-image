@@ -13,6 +13,15 @@
   --border: #e5e5e5;
   --surface: #fff;
   --accent: #111;
+
+  @media (prefers-color-scheme: dark) {
+    --bg: #0c0c0e;
+    --fg: #e5e5e5;
+    --muted: #888;
+    --border: #1e1e22;
+    --surface: #0c0c0e;
+    --accent: #fff;
+  }
 }
 
 body {
@@ -23,13 +32,4 @@ body {
   overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0c;
-    --fg: #e5e5e5;
-    --muted: #888;
-    --border: #222;
-    --surface: #111114;
-    --accent: #fff;
-  }
-}
+

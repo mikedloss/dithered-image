@@ -1,24 +1,28 @@
-import { Tabs } from "@base-ui-components/react";
+import { Tabs } from "@base-ui/react/tabs";
 import { DitheredImage } from "./lib";
 import logoSrc from "./assets/universal-icon-light.png";
+import googleSrc from "./assets/google-icon-logo-svgrepo-com.png";
+import mcdonaldsSrc from "./assets/mcdonald-s-15-logo-svgrepo-com.png";
+import whatsappSrc from "./assets/whatsapp-icon-logo-svgrepo-com.png";
+import messengerSrc from "./assets/facebook-messenger-3-logo-svgrepo-com.svg";
 import "./App.css";
 
 const installCommands = {
-  npm: "npm install dithered-image",
-  yarn: "yarn add dithered-image",
-  pnpm: "pnpm add dithered-image",
-  bun: "bun add dithered-image",
+  npm: "npm install @md/dithered-image",
+  yarn: "yarn add @md/dithered-image",
+  pnpm: "pnpm add @md/dithered-image",
+  bun: "bun add @md/dithered-image",
 };
 
 const usageExamples = {
-  Component: `import { DitheredImage } from "dithered-image"
+  Component: `import { DitheredImage } from "@md/dithered-image"
 
 <DitheredImage
   src="/logo.png"
   invert
   style={{ width: 400, height: 400 }}
 />`,
-  Hook: `import { useDitheredImage } from "dithered-image"
+  Hook: `import { useDitheredImage } from "@md/dithered-image"
 
 function Logo() {
   const ref = useDitheredImage("/logo.png", {
@@ -27,7 +31,7 @@ function Logo() {
   })
   return <canvas ref={ref} style={{ width: 400, height: 400 }} />
 }`,
-  Vanilla: `import { createDitheredCanvas } from "dithered-image"
+  Vanilla: `import { createDitheredCanvas } from "@md/dithered-image"
 
 const canvas = document.querySelector("canvas")
 const cleanup = createDitheredCanvas(canvas, "/logo.png", {
@@ -40,35 +44,41 @@ const cleanup = createDitheredCanvas(canvas, "/logo.png", {
 const demos = [
   {
     title: "Inverted (default)",
-    desc: "Logo as negative space inside a dot field — like Linear's approach.",
+    desc: "Logo as negative space inside a dot field.",
+    src: logoSrc,
     options: { invert: true },
   },
   {
     title: "Direct",
-    desc: "Dots compose the logo itself.",
-    options: { invert: false, dotColor: "rgba(20, 20, 25, 0.9)" },
+    desc: "Dots compose the logo shape directly.",
+    src: messengerSrc,
+    options: { invert: false, threshold: 200, dotColor: "rgba(20, 20, 25, 0.9)" },
+  },
+  {
+    title: "Preserved colors",
+    desc: "Keep the original image colors on each dot.",
+    src: googleSrc,
+    options: { invert: false, preserveColors: true },
   },
   {
     title: "Dense grid",
     desc: "Higher grid resolution for a tighter, more solid look.",
-    options: { invert: true, gridSize: 220, dotScale: 0.8 },
+    src: whatsappSrc,
+    options: { invert: false, gridSize: 220, dotScale: 0.8, threshold: 230, dotColor: "rgba(30, 30, 35, 0.85)" },
   },
   {
     title: "Sparse & floaty",
     desc: "Fewer dots with low ease for a dreamy, slow-settling feel.",
-    options: { invert: true, gridSize: 100, ease: 0.04, jitter: 0.5 },
-  },
-  {
-    title: "Big cursor zone",
-    desc: "Extended repulsion radius with stronger force.",
-    options: { invert: true, mouseRadius: 200, mouseForce: 60 },
+    src: mcdonaldsSrc,
+    options: { invert: false, gridSize: 100, ease: 0.04, jitter: 0.5, threshold: 220, preserveColors: true },
   },
   {
     title: "Custom color",
-    desc: "Any CSS color works for the dots.",
+    desc: "Any CSS color string works for the dot fill.",
+    src: logoSrc,
     options: { invert: true, dotColor: "rgba(99, 102, 241, 0.8)" },
   },
-] as const;
+];
 
 const apiRows = [
   ["invert", "boolean", "true", "Dots around logo (true) or dots as logo (false)"],
@@ -76,6 +86,7 @@ const apiRows = [
   ["gridSize", "number", "170", "Sampling grid resolution — more = denser"],
   ["dotScale", "number", "1", "Multiplier for dot size"],
   ["dotColor", "string", '"rgba(40,40,45,0.9)"', "CSS color for dots"],
+  ["preserveColors", "boolean", "false", "Use original image colors per-dot"],
   ["mouseRadius", "number", "140", "Cursor repulsion radius (px)"],
   ["mouseForce", "number", "40", "Repulsion strength"],
   ["ease", "number", "0.12", "Spring-back speed (lower = floatier)"],
@@ -109,7 +120,6 @@ function App() {
       <section className="section">
         <div className="section-header">
           <h2>Quick start</h2>
-          <p>Install, import, render.</p>
         </div>
 
         <Tabs.Root defaultValue="npm" className="tabs">
@@ -155,7 +165,7 @@ function App() {
           {demos.map((demo) => (
             <div className="demo-card" key={demo.title}>
               <DitheredImage
-                src={logoSrc}
+                src={demo.src}
                 className="demo-canvas-wrap"
                 {...demo.options}
               />
@@ -197,6 +207,14 @@ function App() {
           </table>
         </div>
       </section>
+      {/* Footer */}
+      <footer className="footer">
+        <p>
+          Logos shown in demos are trademarks of their respective owners, used
+          for demonstration purposes only. Logo assets sourced
+          from <a href="https://www.svgrepo.com" target="_blank" rel="noopener noreferrer">SVG Repo</a>.
+        </p>
+      </footer>
     </div>
   );
 }
