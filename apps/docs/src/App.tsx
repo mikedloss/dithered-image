@@ -102,6 +102,10 @@ const apiRows = [
   ["padding", "number", "0.22", "Padding around logo (fraction of bbox)"],
   ["cornerRadius", "number", "0.15", "Outer rounded rect corner radius"],
   ["threshold", "number", "245", "Brightness cutoff for logo detection"],
+  ["shockwave.speed", "number", "225", "Expansion speed of the shockwave ring"],
+  ["shockwave.width", "number", "37", "Width of the shockwave ring"],
+  ["shockwave.strength", "number", "20", "Displacement strength of the shockwave"],
+  ["shockwave.duration", "number", "675", "Duration of the shockwave (ms)"],
 ];
 
 function App() {

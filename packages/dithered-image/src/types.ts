@@ -3,11 +3,11 @@ export interface DitheredImageOptions {
   scale?: number;
   /** Multiplier for individual dot size (default: 1) */
   dotScale?: number;
-  /** true = dots fill a rounded-rect around the logo; false = dots ARE the logo (default: true) */
+  /** true = dots fill a rounded-rect around the logo; false = dots ARE the logo (default: false) */
   invert?: boolean;
   /** Size of the normalized sampling grid - higher = more dots (default: 170) */
   gridSize?: number;
-  /** Brightness threshold 0–255: pixels darker than this count as "logo" (default: 128) */
+  /** Brightness threshold 0–255: pixels darker than this count as "logo" (default: 245) */
   threshold?: number;
   /** CSS color string for the dots (default: "rgba(40, 40, 45, 0.9)") */
   dotColor?: string;

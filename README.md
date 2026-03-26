@@ -98,9 +98,9 @@ All options are optional. Pass them as props to `<DitheredImage>`, as the second
 | --- | --- | --- | --- |
 | `scale` | `number` | `0.5` | Logo size as a fraction of the canvas smaller dimension |
 | `dotScale` | `number` | `1` | Multiplier for individual dot size |
-| `invert` | `boolean` | `true` | `true` = dots fill around the logo; `false` = dots compose the logo |
+| `invert` | `boolean` | `false` | `true` = dots fill around the logo; `false` = dots compose the logo |
 | `gridSize` | `number` | `170` | Sampling grid resolution -- higher means more dots |
-| `threshold` | `number` | `128` | Brightness cutoff (0--255) for logo pixel detection |
+| `threshold` | `number` | `245` | Brightness cutoff (0--255) for logo pixel detection |
 | `dotColor` | `string` | `"rgba(40, 40, 45, 0.9)"` | CSS color for the dots |
 | `preserveColors` | `boolean` | `false` | Use original image pixel colors instead of `dotColor` |
 | `mouseRadius` | `number` | `140` | Cursor repulsion zone radius in CSS pixels |
@@ -115,10 +115,10 @@ All options are optional. Pass them as props to `<DitheredImage>`, as the second
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `speed` | `number` | -- | Expansion speed of the shockwave ring |
-| `width` | `number` | -- | Width of the shockwave ring |
-| `strength` | `number` | -- | Displacement strength |
-| `duration` | `number` | -- | Duration of the shockwave in milliseconds |
+| `speed` | `number` | `225` | Expansion speed of the shockwave ring |
+| `width` | `number` | `37` | Width of the shockwave ring |
+| `strength` | `number` | `20` | Displacement strength |
+| `duration` | `number` | `675` | Duration of the shockwave in milliseconds |
 
 ## Development
 
