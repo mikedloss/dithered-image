@@ -1,6 +1,6 @@
 {
   "name": "@dloss/dithered-element",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "license": "MIT",
   "description": "Dither any React component or DOM element with interactive dot effects",

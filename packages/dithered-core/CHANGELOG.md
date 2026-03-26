@@ -1,0 +1,7 @@
+# @dloss/dithered-core
+
+## 1.1.0
+
+### Minor Changes
+
+- 17b00a0: Extract shared dithering engine into @dloss/dithered-core. Both dithered-image and dithered-element now depend on core as a regular dependency. dithered-element no longer requires dithered-image as a peer dependency -- just `npm install @dloss/dithered-element` works standalone.

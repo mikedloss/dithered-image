@@ -1,6 +1,6 @@
 {
   "name": "@dloss/dithered-image",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "license": "MIT",
   "description": "Interactive dithered image effect for the web - cursor repulsion and click shockwaves",
