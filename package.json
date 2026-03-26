@@ -4,9 +4,10 @@
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "dev": "bun run --filter docs dev",
-    "build": "bun run --filter @md/dithered-image build && bun run --filter docs build",
-    "build:lib": "bun run --filter @md/dithered-image build",
-    "lint": "eslint ."
+    "build": "bun run --filter @dloss/dithered-image build && bun run --filter docs build",
+    "build:lib": "bun run --filter @dloss/dithered-image build",
+    "lint": "eslint .",
+    "clean": "rm -rf node_modules packages/*/node_modules apps/*/node_modules packages/*/dist apps/*/dist"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
