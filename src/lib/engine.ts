@@ -5,9 +5,9 @@ import type { DitheredState, ResolvedOptions } from "./types";
 export const DEFAULTS: ResolvedOptions = {
   scale: 0.5,
   dotScale: 1,
-  invert: true,
+  invert: false,
   gridSize: 170,
-  threshold: 128,
+  threshold: 245,
   dotColor: "rgba(40, 40, 45, 0.9)",
   preserveColors: false,
   mouseRadius: 140,

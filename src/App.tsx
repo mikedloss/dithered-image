@@ -1,6 +1,6 @@
 import { Tabs } from "@base-ui/react/tabs";
 import { DitheredImage } from "./lib";
-import logoSrc from "./assets/universal-icon-light.png";
+import logoSrc from "./assets/hero.png";
 import googleSrc from "./assets/google-icon-logo-svgrepo-com.png";
 import mcdonaldsSrc from "./assets/mcdonald-s-15-logo-svgrepo-com.png";
 import whatsappSrc from "./assets/whatsapp-icon-logo-svgrepo-com.png";
@@ -43,45 +43,44 @@ const cleanup = createDitheredCanvas(canvas, "/logo.png", {
 
 const demos = [
   {
-    title: "Inverted (default)",
+    title: "Default",
+    desc: "Dots compose the logo shape directly.",
+    src: messengerSrc,
+  },
+  {
+    title: "Inverted",
     desc: "Logo as negative space inside a dot field.",
     src: logoSrc,
     options: { invert: true },
   },
   {
-    title: "Direct",
-    desc: "Dots compose the logo shape directly.",
-    src: messengerSrc,
-    options: { invert: false, threshold: 200, dotColor: "rgba(20, 20, 25, 0.9)" },
-  },
-  {
     title: "Preserved colors",
     desc: "Keep the original image colors on each dot.",
     src: googleSrc,
-    options: { invert: false, preserveColors: true },
+    options: { preserveColors: true },
   },
   {
     title: "Dense grid",
     desc: "Higher grid resolution for a tighter, more solid look.",
     src: whatsappSrc,
-    options: { invert: false, gridSize: 220, dotScale: 0.8, threshold: 230, dotColor: "rgba(30, 30, 35, 0.85)" },
+    options: { gridSize: 220, dotScale: 0.8 },
   },
   {
     title: "Sparse & floaty",
     desc: "Fewer dots with low ease for a dreamy, slow-settling feel.",
     src: mcdonaldsSrc,
-    options: { invert: false, gridSize: 100, ease: 0.04, jitter: 0.5, threshold: 220, preserveColors: true },
+    options: { gridSize: 100, ease: 0.04, jitter: 0.5, preserveColors: true },
   },
   {
     title: "Custom color",
     desc: "Any CSS color string works for the dot fill.",
     src: logoSrc,
-    options: { invert: true, dotColor: "rgba(99, 102, 241, 0.8)" },
+    options: { dotColor: "rgba(99, 102, 241, 0.8)" },
   },
 ];
 
 const apiRows = [
-  ["invert", "boolean", "true", "Dots around logo (true) or dots as logo (false)"],
+  ["invert", "boolean", "false", "Dots around logo (true) or dots as logo (false)"],
   ["scale", "number", "0.5", "Logo size as fraction of canvas"],
   ["gridSize", "number", "170", "Sampling grid resolution — more = denser"],
   ["dotScale", "number", "1", "Multiplier for dot size"],
@@ -93,7 +92,7 @@ const apiRows = [
   ["jitter", "number", "0.3", "Random position offset (fraction of grid unit)"],
   ["padding", "number", "0.22", "Padding around logo (fraction of bbox)"],
   ["cornerRadius", "number", "0.15", "Outer rounded rect corner radius"],
-  ["threshold", "number", "128", "Brightness cutoff for logo detection"],
+  ["threshold", "number", "245", "Brightness cutoff for logo detection"],
 ];
 
 function App() {
@@ -101,7 +100,7 @@ function App() {
     <div className="page">
       {/* Hero */}
       <section className="hero">
-        <DitheredImage src={logoSrc} className="hero-canvas" invert />
+        <DitheredImage src={logoSrc} className="hero-canvas" preserveColors />
         <h1>dithered-image</h1>
         <p>
           Interactive dithered image effect for the web. Any image becomes a
