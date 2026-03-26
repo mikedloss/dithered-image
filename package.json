@@ -8,9 +8,13 @@
     "build": "turbo build",
     "build:lib": "turbo build --filter=@dloss/dithered-image",
     "lint": "turbo lint",
-    "clean": "rm -rf node_modules packages/*/node_modules apps/*/node_modules packages/*/dist apps/*/dist .turbo"
+    "clean": "rm -rf node_modules packages/*/node_modules apps/*/node_modules packages/*/dist apps/*/dist .turbo",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "turbo build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "@eslint/js": "^9.39.4",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
