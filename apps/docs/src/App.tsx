@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Tabs } from "@base-ui/react/tabs";
 import { DitheredImage } from "@dloss/dithered-image";
+import { CodeBlock } from "./CodeBlock";
 import heroSrc from "./assets/hero.png";
 import udsSrc from "./assets/uds.png";
 import googleSrc from "./assets/google-icon-logo-svgrepo-com.png";
@@ -164,7 +165,7 @@ function App() {
           </Tabs.List>
           {Object.entries(usageExamples).map(([label, code]) => (
             <Tabs.Panel key={label} value={label} className="tabs-panel">
-              <pre className="code-block">{code}</pre>
+              <CodeBlock code={code} />
             </Tabs.Panel>
           ))}
         </Tabs.Root>
