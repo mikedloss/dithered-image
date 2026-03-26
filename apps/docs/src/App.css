@@ -1,0 +1,262 @@
+/* --- Layout --- */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* --- Hero --- */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  text-align: center;
+}
+
+.hero-canvas {
+  width: min(420px, 80vw);
+  aspect-ratio: 1;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+/* --- Section --- */
+
+.section {
+  padding: 80px 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* --- Demo grid --- */
+
+/* --- Logo tabs --- */
+
+.logo-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-tab-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* --- Demo grid --- */
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.demo-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.demo-canvas-wrap {
+  aspect-ratio: 1;
+  background: var(--bg);
+}
+
+.demo-info {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.demo-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.demo-info p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* --- Tabs --- */
+
+.tabs {
+  max-width: 640px;
+}
+
+.tabs-list {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  width: fit-content;
+  position: relative;
+}
+
+.tabs-tab {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 6px 16px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 7px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.15s;
+}
+
+.tabs-tab[data-selected] {
+  color: var(--fg);
+}
+
+.tabs-indicator {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 0;
+  height: calc(100% - 6px);
+  width: var(--active-tab-width);
+  translate: var(--active-tab-left) -50%;
+  border-radius: 7px;
+  background: var(--fg);
+  opacity: 0.1;
+  transition: translate 0.2s ease, width 0.2s ease;
+}
+
+.tabs-panel {
+  margin-top: 12px;
+}
+
+/* --- Code blocks --- */
+
+.install-code {
+  font-family: var(--mono);
+  font-size: 14px;
+  display: block;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.code-block {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  overflow-x: auto;
+}
+
+/* --- Footer --- */
+
+.footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.footer a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- API table --- */
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.api-table th,
+.api-table td {
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.api-table th {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.api-table code {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
