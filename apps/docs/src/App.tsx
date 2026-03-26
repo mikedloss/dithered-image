@@ -91,7 +91,7 @@ const demos = [
 const apiRows = [
   ["invert", "boolean", "false", "Dots around logo (true) or dots as logo (false)"],
   ["scale", "number", "0.5", "Logo size as fraction of canvas"],
-  ["gridSize", "number", "170", "Sampling grid resolution — more = denser"],
+  ["gridSize", "number", "170", "Sampling grid resolution - more = denser"],
   ["dotScale", "number", "1", "Multiplier for dot size"],
   ["dotColor", "string", '"rgba(40,40,45,0.9)"', "CSS color for dots"],
   ["preserveColors", "boolean", "false", "Use original image colors per-dot"],

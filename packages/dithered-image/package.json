@@ -1,9 +1,9 @@
 {
   "name": "@md/dithered-image",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "description": "Interactive dithered image effect for the web — cursor repulsion and click shockwaves",
+  "description": "Interactive dithered image effect for the web - cursor repulsion and click shockwaves",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

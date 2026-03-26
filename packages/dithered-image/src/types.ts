@@ -5,7 +5,7 @@ export interface DitheredImageOptions {
   dotScale?: number;
   /** true = dots fill a rounded-rect around the logo; false = dots ARE the logo (default: true) */
   invert?: boolean;
-  /** Size of the normalized sampling grid — higher = more dots (default: 170) */
+  /** Size of the normalized sampling grid - higher = more dots (default: 170) */
   gridSize?: number;
   /** Brightness threshold 0–255: pixels darker than this count as "logo" (default: 128) */
   threshold?: number;
@@ -15,7 +15,7 @@ export interface DitheredImageOptions {
   mouseRadius?: number;
   /** Strength of cursor repulsion (default: 40) */
   mouseForce?: number;
-  /** How fast dots spring back — lower = floatier (default: 0.12) */
+  /** How fast dots spring back - lower = floatier (default: 0.12) */
   ease?: number;
   /** Amount of random position jitter as a fraction of grid unit (default: 0.3) */
   jitter?: number;
