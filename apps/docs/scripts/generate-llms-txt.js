@@ -12,7 +12,7 @@ const header = `# dither
 > Interactive dithered dot effects for the web. Turn any image or DOM element into a stipple field with cursor repulsion and click shockwaves.
 
 - GitHub: https://github.com/mikedloss/dither
-- Docs: https://dithered-image-docs.vercel.app/
+- Docs: https://dither-docs.vercel.app/
 
 ## Packages
 

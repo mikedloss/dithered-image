@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "description": "Interactive dithered image effect for the web - cursor repulsion and click shockwaves",
-  "homepage": "https://dithered-image-docs.vercel.app/",
+  "homepage": "https://dither-docs.vercel.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/mikedloss/dither",
