@@ -1,4 +1,4 @@
-# @md/dithered-image
+# @dloss/dithered-image
 
 Interactive dithered/stippled image effect for the web. Converts any raster image into a field of animated dots rendered on an HTML Canvas with cursor repulsion and click shockwaves.
 
@@ -19,16 +19,16 @@ Interactive dithered/stippled image effect for the web. Converts any raster imag
 
 ```bash
 # npm
-npm install @md/dithered-image
+npm install @dloss/dithered-image
 
 # yarn
-yarn add @md/dithered-image
+yarn add @dloss/dithered-image
 
 # pnpm
-pnpm add @md/dithered-image
+pnpm add @dloss/dithered-image
 
 # bun
-bun add @md/dithered-image
+bun add @dloss/dithered-image
 ```
 
 ## Usage
@@ -37,16 +37,16 @@ The library ships three subpath exports so you only pull in what you need:
 
 | Import path | Contents | React required? |
 | --- | --- | --- |
-| `@md/dithered-image` | Everything (component + hook + vanilla) | Yes |
-| `@md/dithered-image/react` | `DitheredImage` component + `useDitheredImage` hook | Yes |
-| `@md/dithered-image/vanilla` | `createDitheredCanvas` function | No |
+| `@dloss/dithered-image` | Everything (component + hook + vanilla) | Yes |
+| `@dloss/dithered-image/react` | `DitheredImage` component + `useDitheredImage` hook | Yes |
+| `@dloss/dithered-image/vanilla` | `createDitheredCanvas` function | No |
 
 ### React Component
 
 The simplest way to use the library in React:
 
 ```tsx
-import { DitheredImage } from "@md/dithered-image/react";
+import { DitheredImage } from "@dloss/dithered-image/react";
 
 function App() {
   return (
@@ -64,7 +64,7 @@ function App() {
 For more control over the canvas element:
 
 ```tsx
-import { useDitheredImage } from "@md/dithered-image/react";
+import { useDitheredImage } from "@dloss/dithered-image/react";
 
 function Logo() {
   const canvasRef = useDitheredImage("/logo.png", { invert: true });
@@ -77,7 +77,7 @@ function Logo() {
 No React dependency -- attach the effect to any `<canvas>` element:
 
 ```ts
-import { createDitheredCanvas } from "@md/dithered-image/vanilla";
+import { createDitheredCanvas } from "@dloss/dithered-image/vanilla";
 
 const canvas = document.querySelector("canvas")!;
 const cleanup = createDitheredCanvas(canvas, "/logo.png", {
@@ -88,7 +88,7 @@ const cleanup = createDitheredCanvas(canvas, "/logo.png", {
 // Call cleanup() to remove event listeners and stop animation
 ```
 
-> **Note:** The root import (`@md/dithered-image`) re-exports everything for backwards compatibility, but includes React as a dependency. Use the subpath imports above to keep your bundle minimal.
+> **Note:** The root import (`@dloss/dithered-image`) re-exports everything for backwards compatibility, but includes React as a dependency. Use the subpath imports above to keep your bundle minimal.
 
 ## Options
 

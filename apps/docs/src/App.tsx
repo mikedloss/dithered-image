@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tabs } from "@base-ui/react/tabs";
-import { DitheredImage } from "@md/dithered-image";
+import { DitheredImage } from "@dloss/dithered-image";
 import heroSrc from "./assets/hero.png";
 import udsSrc from "./assets/uds.png";
 import googleSrc from "./assets/google-icon-logo-svgrepo-com.png";
@@ -23,21 +23,21 @@ const logoOptions = [
 ];
 
 const installCommands = {
-  npm: "npm install @md/dithered-image",
-  yarn: "yarn add @md/dithered-image",
-  pnpm: "pnpm add @md/dithered-image",
-  bun: "bun add @md/dithered-image",
+  npm: "npm install @dloss/dithered-image",
+  yarn: "yarn add @dloss/dithered-image",
+  pnpm: "pnpm add @dloss/dithered-image",
+  bun: "bun add @dloss/dithered-image",
 };
 
 const usageExamples = {
-  Component: `import { DitheredImage } from "@md/dithered-image"
+  Component: `import { DitheredImage } from "@dloss/dithered-image"
 
 <DitheredImage
   src="/logo.png"
   invert
   style={{ width: 400, height: 400 }}
 />`,
-  Hook: `import { useDitheredImage } from "@md/dithered-image"
+  Hook: `import { useDitheredImage } from "@dloss/dithered-image"
 
 function Logo() {
   const ref = useDitheredImage("/logo.png", {
@@ -46,7 +46,7 @@ function Logo() {
   })
   return <canvas ref={ref} style={{ width: 400, height: 400 }} />
 }`,
-  Vanilla: `import { createDitheredCanvas } from "@md/dithered-image"
+  Vanilla: `import { createDitheredCanvas } from "@dloss/dithered-image"
 
 const canvas = document.querySelector("canvas")
 const cleanup = createDitheredCanvas(canvas, "/logo.png", {
