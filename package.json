@@ -1,5 +1,5 @@
 {
-  "name": "dithered-image-monorepo",
+  "name": "dither-monorepo",
   "private": true,
   "packageManager": "bun@1.3.10",
   "workspaces": ["packages/*", "apps/*"],

@@ -1,4 +1,4 @@
-# dithered-image
+# dither
 
 Monorepo for interactive dithered/stippled effects for the web.
 

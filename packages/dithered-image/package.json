@@ -7,7 +7,7 @@
   "homepage": "https://dithered-image-docs.vercel.app/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikedloss/dithered-image",
+    "url": "https://github.com/mikedloss/dither",
     "directory": "packages/dithered-image"
   },
   "main": "./dist/index.cjs",
