@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-import type { DitheredImageOptions } from "./types";
-import { createDitheredCanvas } from "./createDitheredCanvas";
+import type { DitheredImageOptions } from "@dloss/dithered-core";
+import { createDitheredCanvas } from "@dloss/dithered-core";
 
 /**
  * React hook that attaches the dithered image effect to a canvas ref.

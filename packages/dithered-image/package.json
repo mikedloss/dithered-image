@@ -54,6 +54,9 @@
     "build": "tsdown",
     "dev": "tsdown --watch"
   },
+  "dependencies": {
+    "@dloss/dithered-core": "workspace:*"
+  },
   "peerDependencies": {
     "react": ">=18"
   },

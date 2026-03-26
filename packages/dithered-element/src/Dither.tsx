@@ -6,8 +6,8 @@ import {
   useImperativeHandle,
 } from "react";
 import { snapdom } from "@zumer/snapdom";
-import { createDitheredCanvas } from "@dloss/dithered-image/vanilla";
-import type { DitheredImageOptions } from "@dloss/dithered-image/vanilla";
+import { createDitheredCanvas } from "@dloss/dithered-core";
+import type { DitheredImageOptions } from "@dloss/dithered-core";
 import type { DitherProps, DitherHandle } from "./types";
 
 /**

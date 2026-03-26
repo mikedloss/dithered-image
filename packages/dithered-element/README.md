@@ -1,14 +1,12 @@
 # @dloss/dithered-element
 
-Dither any React component or DOM element. Wraps [`@dloss/dithered-image`](https://www.npmjs.com/package/@dloss/dithered-image) with automatic DOM-to-canvas rasterization powered by [snapDOM](https://snapdom.dev).
+Dither any React component or DOM element. Uses [`@dloss/dithered-core`](https://www.npmjs.com/package/@dloss/dithered-core) for the dithering engine and [snapDOM](https://snapdom.dev) for automatic DOM-to-canvas rasterization.
 
 ## Installation
 
 ```bash
-npm install @dloss/dithered-element @dloss/dithered-image
+npm install @dloss/dithered-element
 ```
-
-Both packages are required -- `@dloss/dithered-image` is a peer dependency that provides the dithering engine.
 
 ## Usage
 
@@ -81,7 +79,7 @@ function App() {
 
 ## Props
 
-All [`DitheredImageOptions`](https://www.npmjs.com/package/@dloss/dithered-image) are accepted as props (e.g. `invert`, `gridSize`, `dotColor`, `mouseRadius`, etc.), plus:
+All [`DitheredImageOptions`](https://www.npmjs.com/package/@dloss/dithered-core) are accepted as props (e.g. `invert`, `gridSize`, `dotColor`, `mouseRadius`, etc.), plus:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -97,7 +95,7 @@ All [`DitheredImageOptions`](https://www.npmjs.com/package/@dloss/dithered-image
 
 1. Children are rendered into a hidden container (in the DOM but invisible)
 2. [snapDOM](https://snapdom.dev) serializes the container to an SVG and rasterizes it to a canvas
-3. The rasterized image is passed as a data URL to `createDitheredCanvas` from `@dloss/dithered-image`
+3. The rasterized image is passed as a data URL to `createDitheredCanvas` from `@dloss/dithered-core`
 4. The dithering engine samples pixels and renders interactive dots with cursor repulsion and click shockwaves
 
 ## License

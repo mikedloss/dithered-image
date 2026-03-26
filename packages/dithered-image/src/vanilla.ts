@@ -1,2 +1,2 @@
-export { createDitheredCanvas } from "./createDitheredCanvas";
-export type { DitheredImageOptions } from "./types";
+export { createDitheredCanvas } from "@dloss/dithered-core";
+export type { DitheredImageOptions } from "@dloss/dithered-core";

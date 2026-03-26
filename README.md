@@ -6,7 +6,8 @@ Monorepo for interactive dithered/stippled effects for the web.
 
 | Package | Description |
 | --- | --- |
-| [`packages/dithered-image`](packages/dithered-image) | Dither images with Canvas 2D ([npm](https://www.npmjs.com/package/@dloss/dithered-image)) |
+| [`packages/dithered-core`](packages/dithered-core) | Core dithering engine ([npm](https://www.npmjs.com/package/@dloss/dithered-core)) |
+| [`packages/dithered-image`](packages/dithered-image) | Dither images -- React + vanilla ([npm](https://www.npmjs.com/package/@dloss/dithered-image)) |
 | [`packages/dithered-element`](packages/dithered-element) | Dither any React component ([npm](https://www.npmjs.com/package/@dloss/dithered-element)) |
 | [`apps/docs`](apps/docs) | Documentation and demo site |
 

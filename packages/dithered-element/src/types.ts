@@ -1,4 +1,4 @@
-import type { DitheredImageOptions } from "@dloss/dithered-image/vanilla";
+import type { DitheredImageOptions } from "@dloss/dithered-core";
 
 export interface DitherProps extends DitheredImageOptions {
   children: React.ReactNode;

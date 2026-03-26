@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { DitheredImageOptions } from "./types";
+import type { DitheredImageOptions } from "@dloss/dithered-core";
 import { useDitheredImage } from "./useDitheredImage";
 
 interface DitheredImageProps extends DitheredImageOptions {

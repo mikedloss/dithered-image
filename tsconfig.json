@@ -1,7 +1,9 @@
 {
   "files": [],
   "references": [
+    { "path": "./packages/dithered-core" },
     { "path": "./packages/dithered-image" },
+    { "path": "./packages/dithered-element" },
     { "path": "./apps/docs" }
   ]
 }
