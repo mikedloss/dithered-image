@@ -1,0 +1,19 @@
+main {
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dithered-wrapper {
+  width: min(500px, 80vw);
+  aspect-ratio: 1;
+}
+
+.dithered-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
