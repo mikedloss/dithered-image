@@ -42,24 +42,27 @@ function sampleImage(
   canvasH: number,
   opts: ResolvedOptions
 ): DotGrid {
-  const G = opts.gridSize;
+  // Preserve aspect ratio: fit the image into a grid where the longer side = gridSize
+  const aspect = img.naturalWidth / img.naturalHeight;
+  const GW = aspect >= 1 ? opts.gridSize : Math.round(opts.gridSize * aspect);
+  const GH = aspect >= 1 ? Math.round(opts.gridSize / aspect) : opts.gridSize;
 
   const off = document.createElement("canvas");
-  off.width = G;
-  off.height = G;
+  off.width = GW;
+  off.height = GH;
   const octx = off.getContext("2d")!;
-  octx.drawImage(img, 0, 0, G, G);
-  const pixels = octx.getImageData(0, 0, G, G).data;
+  octx.drawImage(img, 0, 0, GW, GH);
+  const pixels = octx.getImageData(0, 0, GW, GH).data;
 
   const logoSet = new Set<number>();
-  for (let y = 0; y < G; y++) {
-    for (let x = 0; x < G; x++) {
-      const i = (y * G + x) * 4;
+  for (let y = 0; y < GH; y++) {
+    for (let x = 0; x < GW; x++) {
+      const i = (y * GW + x) * 4;
       if (pixels[i + 3] < 20) continue;
       const brightness =
         pixels[i] * 0.299 + pixels[i + 1] * 0.587 + pixels[i + 2] * 0.114;
       if (brightness < opts.threshold) {
-        logoSet.add(y * G + x);
+        logoSet.add(y * GW + x);
       }
     }
   }
@@ -67,13 +70,13 @@ function sampleImage(
   let coords: [number, number][];
 
   if (opts.invert) {
-    let minX = G,
+    let minX = GW,
       maxX = 0,
-      minY = G,
+      minY = GH,
       maxY = 0;
     logoSet.forEach((key) => {
-      const x = key % G;
-      const y = (key - x) / G;
+      const x = key % GW;
+      const y = (key - x) / GW;
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
       if (y < minY) minY = y;
@@ -123,9 +126,9 @@ function sampleImage(
     coords = [];
     for (let y = rt; y < rt + rh; y++) {
       for (let x = rl; x < rl + rw; x++) {
-        if (x < 0 || x >= G || y < 0 || y >= G) {
+        if (x < 0 || x >= GW || y < 0 || y >= GH) {
           if (inRoundedRect(x, y)) coords.push([x, y]);
-        } else if (inRoundedRect(x, y) && !logoSet.has(y * G + x)) {
+        } else if (inRoundedRect(x, y) && !logoSet.has(y * GW + x)) {
           coords.push([x, y]);
         }
       }
@@ -133,21 +136,24 @@ function sampleImage(
   } else {
     coords = [];
     logoSet.forEach((key) => {
-      coords.push([key % G, ((key - (key % G)) / G)]);
+      coords.push([key % GW, ((key - (key % GW)) / GW)]);
     });
   }
 
-  // Map grid → canvas coords
+  // Map grid → canvas coords, preserving aspect ratio
+  const maxGrid = Math.max(GW, GH);
   const gridSpan = opts.invert
-    ? Math.max(...coords.map((c) => c[0])) -
-      Math.min(...coords.map((c) => c[0]))
-    : G;
+    ? Math.max(
+        Math.max(...coords.map((c) => c[0])) - Math.min(...coords.map((c) => c[0])),
+        Math.max(...coords.map((c) => c[1])) - Math.min(...coords.map((c) => c[1]))
+      )
+    : maxGrid;
   const unitScale = Math.max(
     0.5,
     (Math.min(canvasW, canvasH) * opts.scale) / gridSpan
   );
-  const scaledW = G * unitScale;
-  const scaledH = G * unitScale;
+  const scaledW = GW * unitScale;
+  const scaledH = GH * unitScale;
   const offsetX = Math.round((canvasW - scaledW) / 2);
   const offsetY = Math.round((canvasH - scaledH) / 2);
 
@@ -181,8 +187,8 @@ function sampleImage(
     xArr[i] = offsetX + cx * unitScale + rand() * jitterAmt;
     yArr[i] = offsetY + cy * unitScale + rand() * jitterAmt;
 
-    if (opts.preserveColors && cx >= 0 && cx < G && cy >= 0 && cy < G) {
-      const pi = (cy * G + cx) * 4;
+    if (opts.preserveColors && cx >= 0 && cx < GW && cy >= 0 && cy < GH) {
+      const pi = (cy * GW + cx) * 4;
       rArr![i] = pixels[pi];
       gArr![i] = pixels[pi + 1];
       bArr![i] = pixels[pi + 2];

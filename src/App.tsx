@@ -1,11 +1,26 @@
+import { useState } from "react";
 import { Tabs } from "@base-ui/react/tabs";
 import { DitheredImage } from "./lib";
-import logoSrc from "./assets/hero.png";
+import heroSrc from "./assets/hero.png";
+import udsSrc from "./assets/uds.png";
 import googleSrc from "./assets/google-icon-logo-svgrepo-com.png";
 import mcdonaldsSrc from "./assets/mcdonald-s-15-logo-svgrepo-com.png";
 import whatsappSrc from "./assets/whatsapp-icon-logo-svgrepo-com.png";
 import messengerSrc from "./assets/facebook-messenger-3-logo-svgrepo-com.svg";
+import viteSrc from "./assets/vite.svg";
+import reactSrc from "./assets/react.svg";
 import "./App.css";
+
+const logoOptions = [
+  { label: "Hero", src: heroSrc },
+  { label: "UDS", src: udsSrc },
+  { label: "Google", src: googleSrc },
+  { label: "McDonald's", src: mcdonaldsSrc },
+  { label: "WhatsApp", src: whatsappSrc },
+  { label: "Messenger", src: messengerSrc },
+  { label: "Vite", src: viteSrc },
+  { label: "React", src: reactSrc },
+];
 
 const installCommands = {
   npm: "npm install @md/dithered-image",
@@ -45,36 +60,30 @@ const demos = [
   {
     title: "Default",
     desc: "Dots compose the logo shape directly.",
-    src: messengerSrc,
   },
   {
     title: "Inverted",
     desc: "Logo as negative space inside a dot field.",
-    src: logoSrc,
     options: { invert: true },
   },
   {
     title: "Preserved colors",
     desc: "Keep the original image colors on each dot.",
-    src: googleSrc,
     options: { preserveColors: true },
   },
   {
     title: "Dense grid",
     desc: "Higher grid resolution for a tighter, more solid look.",
-    src: whatsappSrc,
     options: { gridSize: 220, dotScale: 0.8 },
   },
   {
     title: "Sparse & floaty",
     desc: "Fewer dots with low ease for a dreamy, slow-settling feel.",
-    src: mcdonaldsSrc,
     options: { gridSize: 100, ease: 0.04, jitter: 0.5, preserveColors: true },
   },
   {
     title: "Custom color",
     desc: "Any CSS color string works for the dot fill.",
-    src: logoSrc,
     options: { dotColor: "rgba(99, 102, 241, 0.8)" },
   },
 ];
@@ -96,11 +105,14 @@ const apiRows = [
 ];
 
 function App() {
+  const [selectedLogo, setSelectedLogo] = useState(0);
+  const currentSrc = logoOptions[selectedLogo].src;
+
   return (
     <div className="page">
       {/* Hero */}
       <section className="hero">
-        <DitheredImage src={logoSrc} className="hero-canvas" preserveColors />
+        <DitheredImage src={currentSrc} className="hero-canvas" preserveColors />
         <h1>dithered-image</h1>
         <p>
           Interactive dithered image effect for the web. Any image becomes a
@@ -160,11 +172,27 @@ function App() {
           <h2>Demos</h2>
           <p>Move your mouse over each canvas. Click for a shockwave.</p>
         </div>
+        <Tabs.Root
+          value={selectedLogo}
+          onValueChange={(v) => setSelectedLogo(v as number)}
+          className="tabs"
+          style={{ marginBottom: 24 }}
+        >
+          <Tabs.List className="tabs-list">
+            {logoOptions.map((logo, i) => (
+              <Tabs.Tab key={logo.label} value={i} className="tabs-tab logo-tab">
+                <img src={logo.src} alt={logo.label} className="logo-tab-icon" />
+                {logo.label}
+              </Tabs.Tab>
+            ))}
+            <Tabs.Indicator className="tabs-indicator" />
+          </Tabs.List>
+        </Tabs.Root>
         <div className="demo-grid">
           {demos.map((demo) => (
             <div className="demo-card" key={demo.title}>
               <DitheredImage
-                src={demo.src}
+                src={currentSrc}
                 className="demo-canvas-wrap"
                 {...demo.options}
               />

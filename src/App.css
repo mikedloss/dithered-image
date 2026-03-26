@@ -83,6 +83,22 @@
 
 /* --- Demo grid --- */
 
+/* --- Logo tabs --- */
+
+.logo-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-tab-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* --- Demo grid --- */
+
 .demo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
