@@ -1,0 +1,65 @@
+{
+  "name": "@dloss/dithered-element",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Dither any React component or DOM element with interactive dot effects",
+  "homepage": "https://dithered-image-docs.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikedloss/dithered-image",
+    "directory": "packages/dithered-element"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "dependencies": {
+    "@zumer/snapdom": "^2.6.0"
+  },
+  "peerDependencies": {
+    "@dloss/dithered-image": ">=1.0.0",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@dloss/dithered-image": "workspace:*",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "tsdown": "^0.21.5"
+  },
+  "keywords": [
+    "dither",
+    "dithered",
+    "stipple",
+    "dots",
+    "canvas",
+    "interactive",
+    "react",
+    "dom",
+    "screenshot",
+    "rasterize"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
