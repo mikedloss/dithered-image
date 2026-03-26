@@ -1,12 +1,13 @@
 # dithered-image
 
-Monorepo for [`@dloss/dithered-image`](https://www.npmjs.com/package/@dloss/dithered-image) -- an interactive dithered/stippled image effect for the web.
+Monorepo for interactive dithered/stippled effects for the web.
 
 ## Packages
 
 | Package | Description |
 | --- | --- |
-| [`packages/dithered-image`](packages/dithered-image) | The library ([npm](https://www.npmjs.com/package/@dloss/dithered-image)) |
+| [`packages/dithered-image`](packages/dithered-image) | Dither images with Canvas 2D ([npm](https://www.npmjs.com/package/@dloss/dithered-image)) |
+| [`packages/dithered-element`](packages/dithered-element) | Dither any React component ([npm](https://www.npmjs.com/package/@dloss/dithered-element)) |
 | [`apps/docs`](apps/docs) | Documentation and demo site |
 
 ## Development

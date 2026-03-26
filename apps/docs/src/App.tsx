@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Tabs } from "@base-ui/react/tabs";
 import { DitheredImage } from "@dloss/dithered-image";
+import { Dither } from "@dloss/dithered-element";
 import { CodeBlock } from "./CodeBlock";
 import heroSrc from "./assets/hero.png";
 import udsSrc from "./assets/uds.png";
@@ -87,6 +88,49 @@ const demos = [
     desc: "Any CSS color string works for the dot fill.",
     options: { dotColor: "rgba(99, 102, 241, 0.8)" },
   },
+];
+
+const elementInstallCommands = {
+  npm: "npm install @dloss/dithered-element @dloss/dithered-image",
+  yarn: "yarn add @dloss/dithered-element @dloss/dithered-image",
+  pnpm: "pnpm add @dloss/dithered-element @dloss/dithered-image",
+  bun: "bun add @dloss/dithered-element @dloss/dithered-image",
+};
+
+const elementUsageExamples = {
+  Basic: `import { Dither } from "@dloss/dithered-element"
+
+<Dither invert gridSize={200}>
+  <Card title="Hello" subtitle="World" />
+</Dither>`,
+  "With deps": `import { Dither } from "@dloss/dithered-element"
+
+// Only re-snapshots when title changes
+<Dither deps={[title]} invert>
+  <Card title={title} />
+</Dither>`,
+  "With ref": `import { useRef } from "react"
+import { Dither } from "@dloss/dithered-element"
+import type { DitherHandle } from "@dloss/dithered-element"
+
+const ref = useRef<DitherHandle>(null)
+
+<Dither ref={ref} deps={[]} invert>
+  <Card title={title} />
+</Dither>
+<button onClick={() => ref.current?.refresh()}>
+  Re-capture
+</button>`,
+};
+
+const elementApiRows = [
+  ["children", "ReactNode", "—", "The element(s) to dither"],
+  ["width", "number", "inferred", "Canvas width in CSS pixels"],
+  ["height", "number", "inferred", "Canvas height in CSS pixels"],
+  ["deps", "DependencyList", "undefined", "Re-snapshot timing: undefined = every render, [] = mount only"],
+  ["className", "string", "—", "Class name for the outer wrapper div"],
+  ["style", "CSSProperties", "—", "Style for the outer wrapper div"],
+  ["ref", "Ref<DitherHandle>", "—", "Exposes .refresh() for imperative re-capture"],
 ];
 
 const apiRows = [
@@ -217,6 +261,108 @@ function App() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Dither Elements */}
+      <section className="section">
+        <div className="section-header">
+          <h2>Dither any element</h2>
+          <p>
+            Use <code>@dloss/dithered-element</code> to dither any React component or DOM element.
+            It rasterizes children automatically using <a href="https://snapdom.dev" target="_blank" rel="noopener noreferrer">snapDOM</a>.
+          </p>
+        </div>
+
+        <Tabs.Root defaultValue="npm" className="tabs">
+          <Tabs.List className="tabs-list">
+            {Object.keys(elementInstallCommands).map((pm) => (
+              <Tabs.Tab key={pm} value={pm} className="tabs-tab">
+                {pm}
+              </Tabs.Tab>
+            ))}
+            <Tabs.Indicator className="tabs-indicator" />
+          </Tabs.List>
+          {Object.entries(elementInstallCommands).map(([pm, cmd]) => (
+            <Tabs.Panel key={pm} value={pm} className="tabs-panel">
+              <code className="install-code">{cmd}</code>
+            </Tabs.Panel>
+          ))}
+        </Tabs.Root>
+
+        <Tabs.Root defaultValue="Basic" className="tabs" style={{ marginTop: 32 }}>
+          <Tabs.List className="tabs-list">
+            {Object.keys(elementUsageExamples).map((label) => (
+              <Tabs.Tab key={label} value={label} className="tabs-tab">
+                {label}
+              </Tabs.Tab>
+            ))}
+            <Tabs.Indicator className="tabs-indicator" />
+          </Tabs.List>
+          {Object.entries(elementUsageExamples).map(([label, code]) => (
+            <Tabs.Panel key={label} value={label} className="tabs-panel">
+              <CodeBlock code={code} />
+            </Tabs.Panel>
+          ))}
+        </Tabs.Root>
+
+        <div className="demo-grid" style={{ marginTop: 32 }}>
+          <div className="demo-card">
+            <Dither className="demo-canvas-wrap" invert gridSize={170}>
+              <div className="dither-demo-content">
+                <div className="dither-demo-icon">D</div>
+                <div className="dither-demo-text">
+                  <strong>dithered-element</strong>
+                  <span>This is a plain HTML element, dithered.</span>
+                </div>
+              </div>
+            </Dither>
+            <div className="demo-info">
+              <h3>HTML element</h3>
+              <p>A styled div wrapped in {"<Dither>"} with invert mode.</p>
+            </div>
+          </div>
+          <div className="demo-card">
+            <Dither className="demo-canvas-wrap" gridSize={200} preserveColors>
+              <div className="dither-demo-content dither-demo-colorful">
+                <div className="dither-demo-gradient" />
+                <div className="dither-demo-text">
+                  <strong>Preserved colors</strong>
+                  <span>Original colors from the element are kept.</span>
+                </div>
+              </div>
+            </Dither>
+            <div className="demo-info">
+              <h3>Color preserved</h3>
+              <p>Element colors carried through to each dot.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ overflowX: "auto", marginTop: 32 }}>
+          <p style={{ fontSize: 14, color: "var(--muted)", marginBottom: 16 }}>
+            All <code>@dloss/dithered-image</code> options are also accepted as props, plus:
+          </p>
+          <table className="api-table">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {elementApiRows.map(([prop, type, def, desc]) => (
+                <tr key={prop}>
+                  <td><code>{prop}</code></td>
+                  <td><code>{type}</code></td>
+                  <td><code>{def}</code></td>
+                  <td>{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 

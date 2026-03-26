@@ -242,6 +242,63 @@
   overflow-x: auto;
 }
 
+/* --- Dither element demos --- */
+
+.dither-demo-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  background: var(--bg);
+  width: 100%;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+}
+
+.dither-demo-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--fg);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--mono);
+}
+
+.dither-demo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dither-demo-text strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dither-demo-text span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dither-demo-colorful {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dither-demo-gradient {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f47067, #6266d1, #00a99a);
+}
+
 /* --- Footer --- */
 
 .footer {
